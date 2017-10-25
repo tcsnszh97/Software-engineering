@@ -37,6 +37,11 @@ class APITestCase(unittest.TestCase):
         json_response = json.loads(response.data.decode('utf-8'))
         self.assertTrue(json_response['error'] == 'not found')
 
+    def test_no_auth(self):
+        response = self.client.get(url_for('api.get_posts'),
+                                   content_type='application/json')
+        self.assertTrue(response.status_code == 200)
+
     def test_bad_auth(self):
         # add a user
         r = Role.query.filter_by(name='User').first()
@@ -51,6 +56,36 @@ class APITestCase(unittest.TestCase):
             url_for('api.get_posts'),
             headers=self.get_api_headers('john@example.com', 'dog'))
         self.assertTrue(response.status_code == 401)
+
+    def test_token_auth(self):
+        # add a user
+        r = Role.query.filter_by(name='User').first()
+        self.assertIsNotNone(r)
+        u = User(email='john@example.com', password='cat', confirmed=True,
+                 role=r)
+        db.session.add(u)
+        db.session.commit()
+
+        # issue a request with a bad token
+        response = self.client.get(
+            url_for('api.get_posts'),
+            headers=self.get_api_headers('bad-token', ''))
+        self.assertTrue(response.status_code == 401)
+
+        # get a token
+        response = self.client.get(
+            url_for('api.get_token'),
+            headers=self.get_api_headers('john@example.com', 'cat'))
+        self.assertTrue(response.status_code == 200)
+        json_response = json.loads(response.data.decode('utf-8'))
+        self.assertIsNotNone(json_response.get('token'))
+        token = json_response['token']
+
+        # issue a request with the token
+        response = self.client.get(
+            url_for('api.get_posts'),
+            headers=self.get_api_headers(token, ''))
+        self.assertTrue(response.status_code == 200)
 
     def test_anonymous(self):
         response = self.client.get(
