@@ -93,6 +93,21 @@ class APITestCase(unittest.TestCase):
             headers=self.get_api_headers('', ''))
         self.assertTrue(response.status_code == 200)
 
+    def test_unconfirmed_account(self):
+        # add an unconfirmed user
+        r = Role.query.filter_by(name='User').first()
+        self.assertIsNotNone(r)
+        u = User(email='john@example.com', password='cat', confirmed=False,
+                 role=r)
+        db.session.add(u)
+        db.session.commit()
+
+        # get list of posts with the unconfirmed account
+        response = self.client.get(
+            url_for('api.get_posts'),
+            headers=self.get_api_headers('john@example.com', 'cat'))
+        self.assertTrue(response.status_code == 403)
+
     def test_posts(self):
         # add a user
         r = Role.query.filter_by(name='User').first()
@@ -160,6 +175,31 @@ class APITestCase(unittest.TestCase):
         self.assertTrue(json_response['url'] == url)
         self.assertTrue(json_response['body'] == 'updated body')
         self.assertTrue(json_response['body_html'] == '<p>updated body</p>')
+
+    def test_users(self):
+        # add two users
+        r = Role.query.filter_by(name='User').first()
+        self.assertIsNotNone(r)
+        u1 = User(email='john@example.com', username='john',
+                  password='cat', confirmed=True, role=r)
+        u2 = User(email='susan@example.com', username='susan',
+                  password='dog', confirmed=True, role=r)
+        db.session.add_all([u1, u2])
+        db.session.commit()
+
+        # get users
+        response = self.client.get(
+            url_for('api.get_user', id=u1.id),
+            headers=self.get_api_headers('susan@example.com', 'dog'))
+        self.assertTrue(response.status_code == 200)
+        json_response = json.loads(response.data.decode('utf-8'))
+        self.assertTrue(json_response['username'] == 'john')
+        response = self.client.get(
+            url_for('api.get_user', id=u2.id),
+            headers=self.get_api_headers('susan@example.com', 'dog'))
+        self.assertTrue(response.status_code == 200)
+        json_response = json.loads(response.data.decode('utf-8'))
+        self.assertTrue(json_response['username'] == 'susan')
 
     def test_comments(self):
         # add two users
