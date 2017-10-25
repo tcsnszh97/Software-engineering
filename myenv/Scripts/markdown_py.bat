@@ -1,0 +1,1 @@
+@"e:\python\szuprojects\flasky\myenv\scripts\python3.exe" "e:\python\szuprojects\flasky\myenv\Scripts\markdown_py" %*

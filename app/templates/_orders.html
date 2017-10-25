@@ -1,0 +1,383 @@
+{% if show_lend == '0' %}
+    <ul class="posts">
+{#        <h5>交易中</h5>#}
+
+{#        {% for lend in lends %}#}
+{#        {% if not lend.received %}#}
+{#            <div class="container">#}
+            {% for lend in lends %}
+            {% if not lend.received %}
+{#            <div class="container">#}
+                <table class="user-order table table-bordered">
+                    <tbody class="unverified-order-wapper">
+                    <tr>
+                        <td>2017-09-07</td>
+                        <td>订单号：{{ lend.id }}</td>
+                        <td>交易中</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <a href="{{ url_for('.user', username=lend.lender.username) }}">
+                                    <img class="img-responsive center-block" src="../static/{{ lend.book.ISBN }}.jpg">
+                                </a>
+                            </div>
+                        </td>
+                {#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+                        <td>
+{#                            <a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a>#}
+                            {{ lend.book.bookname }}
+                            <br>
+                            {{ lend.book.author }}
+                            <br>
+                            {{ lend.book.press }}
+                            <br>
+                            {{ lend.book.published_date }}
+                        </td>
+                        <td>
+                            {{ lend.lender.username }}(出借人)
+                            <br>
+                            书籍配送中
+                            <br>
+                            {{ lend.borrower.username }}(借书人)
+{#                            {{ lend.id }}{{ lend.book.bookname }}#}
+    {#                        <img class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.lender.ISBN }}.jpg">#}
+    {#                        {{ lend.borrower.book.bookname }}#}
+                        </td>
+                        <td>
+{#                            <a href="#">#}
+{#                                <span class="label label-default"> 取消借阅</span>#}
+{#                            </a>#}
+                            <a href="#">
+{#                                <span class="label label-primary"> 确认收货</span>#}
+                                <button class="btn btn-primary">确认收货</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+{#            </div>#}
+        {% endif %}
+        {% endfor %}
+
+        {% for lend in lends %}
+        {% if lend.received %}
+            <table class="user-order table table-bordered">
+                    <tbody class="order-wapper">
+                    <tr>
+                        <td>2017-09-07</td>
+                        <td>订单号：{{ lend.id }}</td>
+                        <td>交易完成</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <a href="{{ url_for('.user', username=lend.lender.username) }}">
+                                    <img class="img-responsive center-block" src="../static/{{ lend.book.ISBN }}.jpg">
+                                </a>
+                            </div>
+                        </td>
+                {#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+                        <td>
+{#                            <a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a>#}
+                            {{ lend.book.bookname }}
+                            <br>
+                            {{ lend.book.author }}
+                            <br>
+                            {{ lend.book.press }}
+                            <br>
+                            {{ lend.book.published_date }}
+                        </td>
+                        <td>
+                            {{ lend.lender.username }}(出借人)
+                            <br>
+                            书籍配送中
+                            <br>
+                            {{ lend.borrower.username }}(借书人)
+{#                            {{ lend.id }}{{ lend.book.bookname }}#}
+    {#                        <img class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.lender.ISBN }}.jpg">#}
+    {#                        {{ lend.borrower.book.bookname }}#}
+                        </td>
+                        <td>
+{#                            <a href="#">#}
+{#                                <span class="label label-default"> 取消借阅</span>#}
+{#                            </a>#}
+                            如果已经还书，请等待借书方收回确认
+{#                            <a href="#">#}
+{#                                <span class="label label-primary"> 确认收货</span>#}
+{#                                <button class="btn btn-primary">确认收货</button>#}
+{#                            </a>#}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if show_lend == '1' %}
+    <ul class="posts">
+        {% for lend in lends %}
+        {% if not lend.received %}
+            <table class="user-order table table-bordered">
+                    <tbody class="unverified-order-wapper">
+                    <tr>
+                        <td>2017-09-07</td>
+                        <td>订单号：{{ lend.id }}</td>
+                        <td>交易中</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <a href="{{ url_for('.user', username=lend.lender.username) }}">
+                                    <img class="img-responsive center-block" src="../static/{{ lend.book.ISBN }}.jpg">
+                                </a>
+                            </div>
+                        </td>
+                {#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+                        <td>
+{#                            <a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a>#}
+                            {{ lend.book.bookname }}
+                            <br>
+                            {{ lend.book.author }}
+                            <br>
+                            {{ lend.book.press }}
+                            <br>
+                            {{ lend.book.published_date }}
+                        </td>
+                        <td>
+                            {{ lend.lender.username }}(出借人)
+                            <br>
+                            书籍配送中
+                            <br>
+                            {{ lend.borrower.username }}(借书人)
+{#                            {{ lend.id }}{{ lend.book.bookname }}#}
+    {#                        <img class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.lender.ISBN }}.jpg">#}
+    {#                        {{ lend.borrower.book.bookname }}#}
+                        </td>
+                        <td>
+{#                            <a href="#">#}
+{#                                <span class="label label-default"> 取消借阅</span>#}
+{#                            </a>#}
+                            等待借书方收书确认
+{#                            <a href="#">#}
+{#                                <span class="label label-primary"> 确认收货</span>#}
+{#                                <button class="btn btn-primary">确认收货</button>#}
+{#                            </a>#}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        {% endif %}
+        {% endfor %}
+        {% for lend in lends %}
+        {% if lend.received %}
+            <table class="user-order table table-bordered">
+                    <tbody class="order-wapper">
+                    <tr>
+                        <td>2017-09-07</td>
+                        <td>订单号：{{ lend.id }}</td>
+                        <td>交易完成</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <a href="{{ url_for('.user', username=lend.lender.username) }}">
+                                    <img class="img-responsive center-block" src="../static/{{ lend.book.ISBN }}.jpg">
+                                </a>
+                            </div>
+                        </td>
+                {#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+                        <td>
+{#                            <a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a>#}
+                            {{ lend.book.bookname }}
+                            <br>
+                            {{ lend.book.author }}
+                            <br>
+                            {{ lend.book.press }}
+                            <br>
+                            {{ lend.book.published_date }}
+                        </td>
+                        <td>
+                            {{ lend.lender.username }}(出借人)
+                            <br>
+                            书籍配送中
+                            <br>
+                            {{ lend.borrower.username }}(借书人)
+{#                            {{ lend.id }}{{ lend.book.bookname }}#}
+    {#                        <img class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.lender.ISBN }}.jpg">#}
+    {#                        {{ lend.borrower.book.bookname }}#}
+                        </td>
+                        <td>
+{#                            <a href="#">#}
+{#                                <span class="label label-default"> 取消借阅</span>#}
+{#                            </a>#}
+                            <a href="#">
+{#                                <span class="label label-primary"> 确认收货</span>#}
+                                <button class="btn btn-danger">已取回书</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if show_lend == '2' %}
+    <ul class="posts">
+        <h4>我的申请</h4>
+        {% for lend in lends %}
+        {% if lend.borrower.id == current_user.id %}
+            <table class="user-order table table-bordered">
+                    <tbody class="order-wapper">
+                    <tr>
+                        <td>2017-09-07</td>
+                        <td>订单号：{{ lend.id }}</td>
+                        <td>申请中</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <a href="{{ url_for('.user', username=lend.lender.username) }}">
+                                    <img class="img-responsive center-block" src="../static/{{ lend.book.ISBN }}.jpg">
+                                </a>
+                            </div>
+                        </td>
+                {#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+                        <td>
+{#                            <a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a>#}
+                            {{ lend.book.bookname }}
+                            <br>
+                            {{ lend.book.author }}
+                            <br>
+                            {{ lend.book.press }}
+                            <br>
+                            {{ lend.book.published_date }}
+                        </td>
+                        <td>
+                            {{ lend.lender.username }}(拥有者)
+                            <br>
+                            借书申请中
+                            <br>
+                            {{ lend.borrower.username }}(申请者)
+{#                            {{ lend.id }}{{ lend.book.bookname }}#}
+    {#                        <img class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.lender.ISBN }}.jpg">#}
+    {#                        {{ lend.borrower.book.bookname }}#}
+                        </td>
+                        <td>
+{#                            <a href="#">#}
+{#                                <span class="label label-default"> 取消借阅</span>#}
+{#                            </a>#}
+                            <a href="#">
+{#                                <span class="label label-primary"> 确认收货</span>#}
+                                <button class="btn btn-danger">取消申请</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        {% endif %}
+        {% endfor %}
+        <h4>收到的申请</h4>
+        {% for lend in lends %}
+        {% if lend.lender.id == current_user.id and lend.borrower_id%}
+            <table class="user-order table table-bordered">
+                    <tbody class="order-wapper">
+                    <tr>
+                        <td>2017-09-07</td>
+                        <td>订单号：{{ lend.id }}</td>
+                        <td>交易完成</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <a href="{{ url_for('.user', username=lend.lender.username) }}">
+                                    <img class="img-responsive center-block" src="../static/{{ lend.book.ISBN }}.jpg">
+                                </a>
+                            </div>
+                        </td>
+                {#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+                        <td>
+{#                            <a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a>#}
+                            {{ lend.book.bookname }}
+                            <br>
+                            {{ lend.book.author }}
+                            <br>
+                            {{ lend.book.press }}
+                            <br>
+                            {{ lend.book.published_date }}
+                        </td>
+                        <td>
+                            {{ lend.lender.username }}(出借人)
+                            <br>
+                            书籍配送中
+                            <br>
+                            {{ lend.borrower.username }}(借书人)
+{#                            {{ lend.id }}{{ lend.book.bookname }}#}
+    {#                        <img class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.lender.ISBN }}.jpg">#}
+    {#                        {{ lend.borrower.book.bookname }}#}
+                        </td>
+                        <td>
+{#                            <a href="#">#}
+{#                                <span class="label label-default"> 取消借阅</span>#}
+{#                            </a>#}
+                            <a href="#">
+{#                                <span class="label label-primary"> 确认收货</span>#}
+                                <button class="btn btn-primary">接收申请</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{#<ul class="posts">#}
+{#    {% for lend in lends %}#}
+{#    <li class="post">#}
+{#        <div class="post-thumbnail">#}
+{#            <a href="{{ url_for('.user', username=lend.lender.username) }}">#}
+{#                <img class="img-rounded profile-thumbnail" src="{{ lend.lender.gravatar(size=40) }}">#}
+{#            </a>#}
+{#        </div>#}
+{#        <div class="post-content">#}
+{#            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>#}
+{#            <div class="post-author"><a href="{{ url_for('.user', username=lend.lender.username) }}">{{ lend.lender.username }}</a></div>#}
+{#            <div class="post-body">#}
+{#                {{ lend.book.bookname }}#}
+{#            </div>#}
+{#            <div class="post-footer">#}
+{#                <a href="#">#}
+{#                    <span class="label label-default"> 拒绝申请</span>#}
+{#                </a>#}
+{#                <a href="#">#}
+{#                    <span class="label label-primary"> 接受申请</span>#}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </li>#}
+{#    {% endfor %}#}
+{#</ul>#}

@@ -1,0 +1,70 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<div class="container">
+{% block page_content %}
+
+    <div class="sw_sform">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="search-wraper" role="search">
+                        <div class="form-group">
+                            <form style="display: inline;" action="{{url_for('.search')}}" method="post" name="search">
+                                {{g.search_form.hidden_tag()}}
+                                {{g.search_form.search(class="search clearable")}}
+                                <button class="btn-default btn-lg" type="button submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-size: 20px;">
+                书屋
+            </div>
+        {% for lend in notborrowed_book %}
+            <div class="panel-body" style="padding:6px;border-bottom: 1px solid #eeeeee">
+                <div class="row">
+{#                    <div class="col-md-4 col-xs-2">#}
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <div class="search_book">
+                            <a href="{{ url_for('.book', book_isbn=lend.book.ISBN)}}" target="_blank">
+                                <img  class="center-block" style="width: 100%;height: auto;" src="../static/{{ lend.book.ISBN }}.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-6">
+                        <h2 href="{{ url_for('.bookshop') }}">{{ lend.book.bookname }}{{ lend.id }}</h2>
+                        <a href="{{ url_for('.bookshop') }}">{{ lend.book.author }}</a>
+                        /<a href="{{ url_for('.bookshop') }}">{{ lend.book.press }}</a>
+                        /<a href="{{ url_for('.bookshop') }}">{{ lend.book.ISBN }}</a>
+                        /<a href="{{ url_for('.bookshop') }}">{{ lend.book.published_date }}</a>
+                        <br/>
+                        简介：巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
+                        <br/>
+                        <button type="button" class="pull-right btn btn-warning">出借</button>
+                        <button type="button" class="pull-right btn btn-primary">借阅</button>
+                    </div>
+                </div>
+             </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+</div>
+
+{% endblock %}

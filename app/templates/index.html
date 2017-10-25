@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block content %}
+{#    <div class="site-header feature-box-section">#}
+    <div class="jumbotron text-center site-header">
+{#        <div class="container jumbotron">#}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+{#                    <img src="bootcdn.png" alt="BootCDN logo" class="hidden">#}
+                    <h1>Xiaopengu</h1>
+                    <h2>与世界分享你的图书</h2>
+                    <p>靠谱、便捷、免费的大学生借书平台<br>
+{#                        <span class="package-amount"><strong></strong></span>#}
+                    </p>
+                    <div class="search-wraper" role="search">
+                        <div class="form-group">
+{#                            <input class="form-control search clearable" placeholder="书名、作者、ISBN"#}
+{#                                                       autocomplete="off" autofocus="" tabindex="0" autocorrect="off"#}
+{#                                                       autocapitalize="off" spellcheck="false">#}
+                            <form style="display: inline;" action="{{url_for('.search')}}" method="post" name="search">
+                                {{g.search_form.hidden_tag()}}
+                                {{g.search_form.search(class="form-control search clearable")}}
+                            </form>
+{#                            <i class="fa fa-search"></i>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="about-us sections section-padding">
+        <div class="container">
+            <header class="section-header text-center">
+{#                <h3 class="section-sub-title">Best Busines</h3>#}
+                <h2 class="section-title">小喷菇书屋</h2>
+                <span class="line"></span>
+                <p>
+{#                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium#}
+{#                    rutrum, ante dolor consectetur nisi#}
+                    在这里你可以和社区的朋友们分享你的图书，同时找到你想看却没有的书籍。
+                </p>
+            </header>
+
+            <div class="our-services-carousel owl-carousel owl-theme">
+                {% for lend in lends %}
+                <div class="service-item">
+                    <h3 class="title">{{ lend.book.bookname }}</h3>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <img class="img-responsive aligncenter" src="../static/{{ lend.book.ISBN }}.jpg">
+                    </div>
+                    <div class="text-left">
+                        <t> 拥有者：{{ lend.lender.username }} </t><br>
+                        <t>特有书号:{{ lend.id }}</t><br>
+                        <t>{{ lend.book.author }}</t><br>
+                        <t>{{ lend.book.press }}</t><br>
+                        <t>ISBN：{{ lend.book.ISBN }}</t><br>
+                        <t>{{ lend.book.published_date }}</t>
+{#                    <p>Vestibulum facilisis ex eget ipsum congue, vel accumsan sapien dapibus Pellentesque ut quam id massa aliquet sodales.</p>#}
+                    <a href="{{ url_for('.book',book_isbn=lend.book.ISBN) }}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                {% endfor %}
+{#                <div class="service-item">#}
+{#                    <h3 class="title">Beanding & Packing</h3>#}
+{#                    <p>Vestibulum facilisis ex eget ipsum congue, vel accumsan sapien dapibus Pellentesque ut quam id massa aliquet sodales.</p>#}
+{#                    <a href="#" class="btn btn-primary">Read More</a>#}
+{#                </div>#}
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-box-section sections section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="#"><img class="img-responsive" src="../static/features/1.jpg" alt="Feature Image"></a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="feature-box">
+                        <h3 class="title text-uppercase title-underline">和社区的朋友们分享你的图书</h3>
+                        <h4>宿舍里堆积了很多大一大二时候上课用的教材，现在却已经用不上了，想要借给师弟师妹却不知道哪些同学需要？
+                            我们帮你找到需要的师弟师妹们。</h4>
+                        <h4>
+                            除了教材外还有很多想与校友分享的图书？统统可以借给需要的人哦，我们来帮你找到志同道合的人。
+                        </h4>
+                        <p>❤xiaopengu 衷心的感谢所有愿意将自己的宝贝书籍借给其他人的同学❤</p>
+                        <a href="{{ url_for('main.lend') }}" class="btn btn-primary ">出借图书</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-features our-features-1 sections section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="feature-box">
+                        <h3 class="title text-uppercase title-underline"> 向朋友们借阅你想看却没有的书籍 </h3>
+                        <h4>教材太贵了不想买？想看看有没有师兄师姐能借自己又找不到师兄师姐？来这里看看是不是早就已经有人把书放在这里了吧。</h4>
+                        <h4>
+                           除了教材还可以找找看有没有自己想看了很久的那本书哦，说不定已经有同学良心的把他放在出借列表了。
+                        </h4>
+                        <a href="{{ url_for('main.bookshop', username=current_user.username) }}" class="btn btn-primary btn-wide btn-icon">搜索图书
+{#                            <i class="fa fa-angle-right" aria-hidden="true"></i>#}
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a href="#"><img class="img-responsive aligncenter" src="../static/features/2.jpg" alt="Feature Image"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-portfolio our-portfolio-1 sections">
+        <div class="container">
+            <header class="section-header text-center">
+                <h3 class="section-sub-title">Recent works</h3>
+                <h2 class="section-title">关于我们的书屋</h2>
+                <span class="line"></span>
+            </header>
+        </div>
+    </section>
+
+    <section class="counter counter-1 sections">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-3">
+                    <div class="counter-content text-center">
+                        <h3 class="counter-digit"><span data-from="0" data-to="452" data-speed="800">452</span></h3>
+                        <h4 class="counter-desc">参与用户</h4>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                    <div class="counter-content text-center">
+                        <h3 class="counter-digit"><span data-from="0" data-to="125" data-speed="800">125</span>+</h3>
+                        <h4 class="counter-desc">流动图书</h4>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                    <div class="counter-content text-center">
+                        <h3 class="counter-digit"><span data-from="0" data-to="468" data-speed="800">468</span></h3>
+                        <h4 class="counter-desc">借阅交易</h4>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                    <div class="counter-content text-center">
+                        <h3 class="counter-digit counted"><span data-from="0" data-to="554" data-speed="800">554</span>+</h3>
+                        <h5 class="counter-desc">图书资料</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="jumbotron">
+         <div class="container">
+            <h2>查看订单</h2>
+            <p> 前几天申请的书籍不知道出借人看到了没有？点击此处查看订单管理界面，对方接受了就可以开始联系对方了。 </p>
+            <p><a class="btn btn-primary btn-lg" href=" {{url_for('.user_order') }}" role="button">订单管理 &raquo;</a></p>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer">
+        <div class="container">
+            <aside class="row footer-widgets">
+{#                <div class="widget-column col-sm-6 col-md-3">#}
+{#                    <section class="widget widget_text">#}
+{#                        <h2 class="widget-title">&nbsp;</h2>#}
+{#                        <div class="textwidget">#}
+{#                            <div class="footer-logo-widget">#}
+{#                                <a href="index.html"><img src="images/footer-logo.png" alt=""></a>#}
+{#                                <p>Integer fermentum trique velit a lacinia.</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </section>#}
+{#                </div>#}
+
+                <div class="widget-column col-sm-12 col-md-6">
+                    <section class="widget widget_nav_menu">
+                        <h2>关于我们</h2>
+                        <h4>Xiaopengu 是我们团队自发做的借书网站，为了给大学生提供一个安全、方便、高效的借书平台。我们希望你能在
+                            这里找到你想要的图书，我们也希望你能将自己宝贝的书籍借阅给他人，形成一个良性的循环，建立一个友善的社区
+                            环境。
+                        </h4><br>
+                        <h4>
+                            由于我们经验、技术的不足，可能在网站的运营与技术支持上会有许多的问题，希望你能将宝贵的意见提供给我们，
+                            帮助我们进步与提升自己，让我们带给你越来越好的体验。
+                            反馈或建议请发送邮件至：xiaopengu@foxmail.com
+                        </h4>
+{#                        <ul>#}
+{#                            <li><a href="#">Speciality Services</a></li>#}
+{#                            <li><a href="#">Sredit Cars</a></li>#}
+{#                            <li><a href="#">Support Forums</a></li>#}
+{#                            <li><a href="#">Faqs</a></li>#}
+{#                            <li><a href="#">Terms and Conditions</a></li>#}
+{#                            <li><a href="#">Financial Planner</a></li>#}
+{#                            <li><a href="#">Tax Helper</a></li>#}
+{#                            <li><a href="#">Contact Us</a></li>#}
+{#                        </ul>#}
+                    </section>
+                </div>
+
+{#                <div class="widget-column col-sm-6 col-md-3">#}
+{#                    <section class="widget widget_nav_menu">#}
+{#                        <h2 class="widget-title">Quick Links</h2>#}
+{#                        <ul>#}
+{#                            <li><a href="#">Speciality Services</a></li>#}
+{#                            <li><a href="#">Sredit Cars</a></li>#}
+{#                            <li><a href="#">Support Forums</a></li>#}
+{#                            <li><a href="#">Faqs</a></li>#}
+{#                            <li><a href="#">Terms and Conditions</a></li>#}
+{#                            <li><a href="#">Financial Planner</a></li>#}
+{#                            <li><a href="#">Tax Helper</a></li>#}
+{#                            <li><a href="#">Contact Us</a></li>#}
+{#                        </ul>#}
+{#                    </section>#}
+{#                </div>#}
+{##}
+{#                <div class="clearfix visible-sm"></div>#}
+{##}
+{#                <div class="widget-column col-sm-6 col-md-3">#}
+{#                    <section class="widget widget_featured_posts">#}
+{#                        <h2 class="widget-title">Feature Blogs</h2>#}
+{#                        <ul>#}
+{#                            <li>#}
+{#                                <div class="post-thumb">#}
+{#                                    <a href="#"><img src="images/widget/f-1.jpg" alt="#"></a>#}
+{#                                </div>#}
+{#                                <div class="post-content">#}
+{#                                    <h3 class="post-title"><a href="#">Women Work in Office</a></h3>#}
+{#                                    <span class="post-date">18 Dec 2017</span>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <div class="post-thumb">#}
+{#                                    <a href="#"><img src="images/widget/f-2.jpg" alt="#"></a>#}
+{#                                </div>#}
+{#                                <div class="post-content">#}
+{#                                    <h3 class="post-title"><a href="#">Women Work in Office</a></h3>#}
+{#                                    <span class="post-date">18 Dec 2017</span>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <div class="post-thumb">#}
+{#                                    <a href="#"><img src="images/widget/f-3.jpg" alt="#"></a>#}
+{#                                </div>#}
+{#                                <div class="post-content">#}
+{#                                    <h3 class="post-title"><a href="#">Women Work in Office</a></h3>#}
+{#                                    <span class="post-date">18 Dec 2017</span>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </section>#}
+{#                </div>#}
+{##}
+{#                <div class="widget-column col-sm-6 col-md-3">#}
+{#                    <section class="widget widget_twitter">#}
+{#                        <h2 class="widget-title">Latest Tweets</h2>#}
+{#                        <ul>#}
+{#                            <li>#}
+{#                                <p>#}
+{#                                    <a href="#">@Antarctica,</a> Lorem ipsum dolor Sit amet consectetur#}
+{#                                    <span class="tweet-time">2 hours ago</span>#}
+{#                                </p>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <p>#}
+{#                                    <a href="#">@Antarctica,</a> Lorem ipsum dolor Sit amet consectetur#}
+{#                                    <span class="tweet-time">2 hours ago</span>#}
+{#                                </p>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <p>#}
+{#                                    <a href="#">@Antarctica,</a> Lorem ipsum dolor Sit amet consectetur#}
+{#                                    <span class="tweet-time">2 hours ago</span>#}
+{#                                </p>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </section>#}
+{#                </div>#}
+            </aside>
+        </div>
+
+        <div class="sub-footer text-center">
+            <div class="container">
+                <p>&copy; 2017 xiaopengu
+                    <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17117726号</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}

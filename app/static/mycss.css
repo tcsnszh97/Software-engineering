@@ -1,0 +1,271 @@
+@charset "UTF-8";
+
+/* 书本信息 */
+.summary {
+    float: left;
+    margin-left: 20px;
+    width: 600px;
+    position: relative;
+}
+
+.detail-info {
+    padding: 10px 0;
+    overflow: hidden;
+    border-bottom: 1px dotted #eaeaea;
+}
+
+.detail-info a {
+    color: #1a66b3;
+}
+
+.detail-info a:hover {
+    color: #f60;
+}
+
+.detail-info ul {
+    padding: 5px 0;
+    overflow: hidden;
+}
+
+.detail-info li {
+    float: left;
+    padding-right: 20px;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.detail-info .t1 {
+    width: 200px;
+}
+
+.detail-info .t2 {
+    width: 185px;
+}
+
+.detail-info .t3 {
+    width: 185px;
+    padding: 0;
+}
+
+.detail-info span {
+    color: #666;
+}
+
+.detail-info .original-price .price_d {
+    color: #999;
+    font-size: 12px;
+}
+
+.detail-info .original-price .del {
+}
+
+/* 标题 */
+#name h2 {
+    font-size: 24px;
+    line-height: 28px;
+    color: #333;
+}
+
+#name .advertise-word {
+    font-size: 16px;
+    color: #333333;
+    line-height: 24px;
+    padding-top: 10px;
+}
+
+/*购买数量*/
+.buy-num {
+    overflow: hidden;
+    float: left;
+    vertical-align: middle;
+}
+
+.buy-num .buy-num-text {
+    width: 55px;
+    height: 30px;
+    line-height: 26px;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    font-size: 16px;
+    outline: none;
+    float: left;
+}
+
+.buy-num a {
+    width: 29px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    float: left;
+    background-color: #e1e1e1;
+    color: #666;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.buy-num a:hover {
+    text-decoration: none;
+}
+
+.buy-num a.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.attr-title {
+    font-size: 21px;
+    float: left;
+    color: #39b3d7;
+}
+
+/*图书介绍目录等*/
+.detail-wrap {
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.txt-wrap {
+    float: left;
+    overflow: hidden;
+    width: 890px;
+}
+
+.txt-hd {
+    height: 30px;
+    border-bottom: 3px solid #de0304;
+    margin-top: 20px
+}
+
+.txt-hd h5 {
+    display: inline-block;
+    float: left;
+    border-radius: 3px 3px 0 0;
+    background-color: #de0304;
+    color: #fff;
+    padding: 0 20px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.txt-bd {
+    font-size: 14px;
+    color: #444;
+    line-height: 28px;
+    padding: 10px 20px;
+}
+
+.txt-bd .content {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.h-limit {
+    height: 205px;
+    overflow: hidden;
+}
+
+.view-all {
+    color: #1a66b3;
+    font-size: 14px;
+}
+
+.section-img p {
+    text-align: center;
+}
+
+/* 猜你喜欢 */
+.similar-rank {
+    float: left;
+    width: 190px;
+}
+
+.similar-rank .hd {
+    border-top: 3px solid #de0304;
+    padding: 0;
+    margin-bottom: -20px;
+
+}
+
+.similar-rank .hd h3 {
+    height: 35px;
+    line-height: 35px;
+    border-style: solid;
+    border-width: 0 1px;
+    border-color: #eaeaea;
+    text-align: center;
+    font-size: 14px;
+}
+
+.similar-rank .bd {
+    border: 1px solid #eaeaea;
+    border-top: 0;
+    height: 405px;
+    overflow: hidden;
+}
+
+.similar-rank li {
+    list-style-type: none;
+    height: 100px;
+    position: relative;
+    border-top: 1px dotted #eaeaea;
+    padding: 0 12px;
+}
+
+.similar-rank li .title {
+    position: absolute;
+    overflow: hidden;
+    height: 36px;
+    width: 90px;
+    left: 110px;
+    top: 8px;
+    line-height: 18px;
+}
+
+.similar-rank li .pic {
+    width: 80px;
+    height: 98px;
+}
+
+.similar-rank li .pic .subpic img {
+    max-width: 85px;
+    max-height: 85px;
+}
+
+.similar-rank li .price {
+    position: absolute;
+    left: 110px;
+    top: 55px;
+    line-height: 16px;
+    display: block;
+}
+
+.similar-rank li .num {
+    width: 16px;
+    height: 16px;
+    display: none;
+    overflow: hidden;
+    font-size: 12px;
+    background-color: #b4b4b4;
+    color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 16px;
+    margin: 3px 3px 0 0;
+}
+
+.similar-rank ul {
+    padding: 0;
+    margin: 0
+}
+
+.pic {
+    text-align: center;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}

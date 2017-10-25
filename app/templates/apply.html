@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Xiaopengu{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>出借申请</h1>
+</div>
+    <div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <img class="img-responsive" src="../static/{{ book.ISBN }}.jpg" width="100%">
+        </div>
+        <div class="detail-info">
+            <p>是否确认出借这本书，确认后其他用户可搜索到并申请借阅此书，届时你可在订单管理中查看申请并确认接受。</p>
+            <p>请确保你的图书现在已经在你手里，方便完成出借后可以第一时间将书借给有需要的人</p>
+            <ul>
+                <li class="t4">
+                    作者：
+                    <a href="{{ url_for('.bookshop') }}">{{ book.author }}</a>
+                </li>
+                <li class="t4">
+                    出版社：
+                    <a href="{{ url_for('.bookshop') }}">{{ book.press }}</a>
+                </li>
+                <li class="t4">
+                    ISBN：
+                    <a href="{{ url_for('.bookshop') }}">{{ book.ISBN }}</a>
+                </li>
+                <li class="t4">
+                    出版日期：
+                    <a href="{{ url_for('.bookshop') }}">{{ book.published_date }}</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+    {#        {{ wtf.quick_form(form) }}#}
+    {#        <a href="bookshop.html" class="btn btn-primary">确认</a>#}
+            <form style="display: inline;" action="{{url_for('.apply',book_isbn=book.ISBN)}}" method="post" name="apply">
+                <button class="btn btn-primary" type="button submit">
+                    确认
+                </button>
+            </form>
+
+            <a href="{{ url_for('.bookshop')}}" class="btn btn-default">取消</a>
+            <p>❤xiaopengu 衷心的感谢所有愿意将自己的宝贝书籍借给其他人的同学❤</p>
+        </div>
+    </div>
+
+
+
+{% endblock %}

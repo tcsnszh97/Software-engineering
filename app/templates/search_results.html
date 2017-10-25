@@ -1,0 +1,120 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+
+
+{#    <div class="jumbotron text-center site-header">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-xs-12">#}
+{#                    <div class="search-wraper" role="search">#}
+{#                    <div class="" role="search">#}
+{#                        <div class="form-group">#}
+{#                            <form style="display: inline;" action="{{url_for('.search')}}" method="post" name="search">#}
+{#                                {{g.search_form.hidden_tag()}}#}
+{#                                {{g.search_form.search(class="form-control search clearable")}}#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{#<div class="text-center">#}
+{#    <form style="display: inline;" action="{{url_for('.search')}}" method="post" name="search">#}
+{#        {{g.search_form.hidden_tag()}}#}
+{#        {{g.search_form.search(class="input-lg")}}#}
+{#        <input type="submit" value="搜索" class="btn-primary">#}
+{#    </form>#}
+{#</div>#}
+
+<div class="container">
+{% block page_content %}
+
+{#    <form action="#" class="header-search-form">#}
+{#        <input type="text" name="s" id="s" value="" placeholder="Search">#}
+{#        <input type="submit" id="search-submit" value="Go">#}
+{#    </form>#}
+{#    <div class="sw_sform row">#}
+{#        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">#}
+{#            <div>Xiaopengu</div>#}
+{#            <div class="input-group">#}
+{#                <input type="text" class="form-control" placeholder="Search for...">#}
+{#                <span class="input-group-btn">#}
+{#                    <button class="btn btn-default" type="button">#}
+{#                        <span class="glyphicon glyphicon-search"></span>#}
+{#                    </button>#}
+{#                </span>#}
+{#            </div><!-- /input-group -->#}
+{#            <br>#}
+{#        </div><!-- /.col-lg-6 -->#}
+{#    </div><!-- /.row -->#}
+    <div class="sw_sform">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="search-wraper" role="search">
+                        <div class="form-group">
+                            <form style="display: inline;" action="{{url_for('.search')}}" method="post" name="search">
+                                {{g.search_form.hidden_tag()}}
+                                {{g.search_form.search(class="search clearable")}}
+                                <button class="btn-default btn-lg" type="button submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-size: 20px;">
+                书屋
+            </div>
+        {% for book in results %}
+            <div class="panel-body" style="padding:6px;border-bottom: 1px solid #eeeeee">
+                <div class="row">
+{#                    <div class="col-md-4 col-xs-2">#}
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <div class="search_book">
+                            <a href="{{ url_for('.book', book_isbn=book.ISBN)}}" target="_blank">
+                                <img  class="center-block" style="width: 100%;height: auto;" src="../static/{{ book.ISBN }}.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-6">
+                        <h2 href="{{ url_for('.bookshop') }}">{{ book.bookname }}</h2>
+                        <a href="{{ url_for('.bookshop') }}">{{ book.author }}</a>
+                        /<a href="{{ url_for('.bookshop') }}">{{ book.press }}</a>
+                        /<a href="{{ url_for('.bookshop') }}">{{ book.ISBN }}</a>
+                        /<a href="{{ url_for('.bookshop') }}">{{ book.published_date }}</a>
+                        <br/>
+                        简介：巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
+                        <br/>
+                        <a href="{{ url_for('.apply', book_isbn=book.ISBN)}}">
+                            <button type="button" class="pull-right btn btn-warning">出借</button>
+                        </a>
+                        <a href="{{ url_for('.book', book_isbn=book.ISBN)}}">
+                            <button type="button" class="pull-right btn btn-primary">借阅</button>
+                        </a>
+                    </div>
+                </div>
+             </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div>
+    <h5>没有找到您需要的书籍？请联系我们</h5>
+</div>
+
+{% endblock %}
+</div>
+
+{% endblock %}
